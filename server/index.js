@@ -11,6 +11,15 @@ app.use("/api/todo", todoRoutes);
 app.get("/", (req, res, next) => {
   res.send("Hello World");
 });
+//error handling middleware
+app.use((err, req, res, next) => {
+  const statusCode = err.statusCode || 500;
+  const message = err.message || "Internal server error";
+
+  res.status(statusCode).json({
+    error: message,
+  });
+});
 
 app.listen(PORT, () => {
   console.log(`listening on port ${PORT}`);
