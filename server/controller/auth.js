@@ -45,7 +45,16 @@ export const login = async (req, res, next) => {
   const token = jwt.sign({ id: user._id }, process.env.JWT);
 
   console.log(token);
-  res.send("login route");
+
+  res
+    .cookie("access_token", token, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+    })
+    .status(200)
+    .json({
+      message: "Logged in successfully",
+    });
 };
 export const logout = async (req, res, next) => {
   res.send("logout");
