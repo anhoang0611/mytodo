@@ -1,10 +1,15 @@
 import express from "express";
 import authRoutes from "./routes/auth.js";
 import todoRoutes from "./routes/todo.js";
+import bodyParser from "body-parser";
+import dotenv from "dotenv";
 
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
+dotenv.config();
+
+app.use(bodyParser.json());
 app.use("/api/user", authRoutes);
 app.use("/api/todo", todoRoutes);
 
