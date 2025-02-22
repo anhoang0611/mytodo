@@ -85,7 +85,7 @@
   }
 
   .iconHover{
-    @apply transition ease-in-out cursor-pointer;
+    @apply transition ease-in-out cursor-pointer hover:text-[#000];
   }
 }
 
