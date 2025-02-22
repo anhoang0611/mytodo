@@ -15,7 +15,7 @@ export async function register(previousState, formData) {
     if (data?.error) {
       return { ...previousState, error: data.error };
     }
-    return { error: null, success: data };
+    return { error: null, success: data.message };
   } catch (error) {
     return { ...previousState, error: "Something went wrong" };
   }

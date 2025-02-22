@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useFormState } from "react";
+import React, { useState, useEffect, useActionState } from "react";
 //import components
 import { Label } from "./ui/label";
 import { Input } from "./ui/input";
@@ -12,7 +12,7 @@ const Register = () => {
     email: "",
     password: "",
   });
-  const [state, formAction, isPending] = useFormState(register,{
+  const [state, formAction, isPending] = useActionState(register,{
     error: null,
     success: null
   });
@@ -43,6 +43,17 @@ const Register = () => {
             <Label>Password</Label>
             <Input type="password" name="password" placeholder="Enter password" value={formData.password} onChange={handleChange} />
           </div>
+          {
+            state.success && (
+              <span className="message successMsg">{state.success} {"Redirecting..."}</span>
+            )
+          }
+          {
+            state.error && (
+              <span className="message errorMsg">{state.error}</span>
+            )
+          }
+          
           <Button disabled={isPending}>
             {
             isPending ? "Registering..." : "Register"
