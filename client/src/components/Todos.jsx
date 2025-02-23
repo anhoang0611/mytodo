@@ -7,17 +7,10 @@ import { FiDelete } from "react-icons/fi";
 import { CiEdit } from "react-icons/ci";
 import { CircleUserRound } from "lucide-react";
 import useSWR from "swr";
+import Profile from "./Profile";
+import fetcher from "../actions/fetcher";
 
-const fetcher = (url, options = {}) => { 
-  return fetch(url, {
-    method: options.method || "GET",
-    headers: { "Content-Type": "application/json" },
-    credentials: "include",
-    mode: "cors",
-    body: options.body ? JSON.stringify(options.body) : undefined,
-  })
-    .then((res) => res.json());
-}
+
 
 const Todos = () => {
   const {data, error, isLoading, mutate} = useSWR("http://localhost:3000/api/todo", fetcher);
@@ -126,8 +119,9 @@ const Todos = () => {
   }
   return (
     <div className="mx-auto mt-20 max-w-lg px-4 w-full flex flex-col gap-6">
-      <div>
-        <CircleUserRound/>
+      <div className="flex justify-end">
+        
+        <Profile />
       </div>
       <h1 className="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 font-bold text-4xl text-center mb-4 text-transparent bg-clip-text">Todos App</h1>
       <form onSubmit={handleAddTodo} className="flex gap-4 items-center">
@@ -146,7 +140,7 @@ const Todos = () => {
                   <span className={`flex-1 px-3 ${todo.isCompleted ? "line-through text-[#63657b]" : ""}`}>{todo.title}</span>
                   <div className="flex px-3 gap-2">
                     <SiTicktick onClick={() => handleComplete(todo._id,todo.isCompleted)} className={`transition ease-in-out hover:cursor-pointer ${todo.isCompleted ? "text-primary" : "text-slate-400"} `} />
-                    <CiEdit className="iconHover" />
+                    {/* <EditTodo /> */}
                     <FiDelete className="iconHover" onClick={() => deleteTodo(todo._id)} />
                   </div>
                 </div>
