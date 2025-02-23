@@ -44,8 +44,6 @@ export const login = async (req, res, next) => {
   // generate a jwt token
   const token = jwt.sign({ id: user._id }, process.env.JWT);
 
-  console.log(token);
-
   res
     .cookie("access_token", token, {
       httpOnly: true,
