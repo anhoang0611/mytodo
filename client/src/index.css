@@ -83,7 +83,9 @@
   .successMsg{
     @apply bg-green-500;
   }
-
+  .errorMsg {
+    @apply bg-destructive text-destructive-foreground;
+  }
   .iconHover{
     @apply transition ease-in-out cursor-pointer hover:text-[#000];
   }
