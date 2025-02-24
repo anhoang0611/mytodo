@@ -9,7 +9,7 @@ import { CircleUserRound } from "lucide-react";
 import useSWR from "swr";
 import Profile from "./Profile";
 import fetcher from "../actions/fetcher";
-
+import EditTodo from "./EditTodo";
 
 
 const Todos = () => {
@@ -61,7 +61,7 @@ const Todos = () => {
     }
 
     await mutate(addTodo, {
-      optimisticData: [...data, newTodo],
+      optimisticData: [...data,newTodo],
       revalidate: true,
       rollbackOnError: true,
     })
@@ -140,7 +140,7 @@ const Todos = () => {
                   <span className={`flex-1 px-3 ${todo.isCompleted ? "line-through text-[#63657b]" : ""}`}>{todo.title}</span>
                   <div className="flex px-3 gap-2">
                     <SiTicktick onClick={() => handleComplete(todo._id,todo.isCompleted)} className={`transition ease-in-out hover:cursor-pointer ${todo.isCompleted ? "text-primary" : "text-slate-400"} `} />
-                    {/* <EditTodo /> */}
+                    <EditTodo todo={todo} mutate={mutate} />
                     <FiDelete className="iconHover" onClick={() => deleteTodo(todo._id)} />
                   </div>
                 </div>
